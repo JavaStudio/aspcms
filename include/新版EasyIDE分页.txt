@@ -1,0 +1,26 @@
+分页类使用帮助；
+dim pager : set pager = new pager_class
+pager.size = SYSTEM_PAGESIZE '分页数量
+set rst = pager.parse(sql,"id",conn)
+if rst.eof then
+  echo "No Data."
+else
+  while not rst.eof
+    rst("id")
+  rst.movenext:wend
+end if
+rst.close : set rst = nothing
+
+显示分页链接：
+<%=pager.turner%>
+
+分页样式：
+/* page turner */
+.turner {margin:0 10px 0 0;float:right;}
+.turner {width:auto;padding:0px 0px 0px 1px;color:#147DB6;font-size:12px;clear:both;height:30px;float:right;}
+.turner a, .turner span{float:left;display:block;width:auto;padding:1px 6px;margin:0 2px;font-size:16px;}
+.turner a:link, .turner a:visited{text-decoration:none;font-weight:normal;}
+.turner a:hover, .turner a.c{background:#93BC0C;color:#fff;}
+.turner cite{padding:0;}
+.turner label{color:#147DB6;font-weight:normal;}
+.turner span{display:none;}
